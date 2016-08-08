@@ -40,7 +40,6 @@ public class CustomAdapter extends ArrayAdapter<Result> {
 
         Result movieItems = mResults.get(position);
 
-
         String name= movieItems.getTitle();
         String description= movieItems.getOverview();
         double rating= movieItems.getVoteAverage();

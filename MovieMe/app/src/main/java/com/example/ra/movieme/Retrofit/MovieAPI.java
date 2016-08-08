@@ -21,22 +21,5 @@ public interface MovieAPI {
     @GET("top_rated")Call<Movie> getTopRated(@Query("api_key") String api);
     @GET("upcoming")Call<Movie> getUpcoming(@Query("api_key")String api);
 
-    class Factory {
 
-        private static MovieAPI service;
-
-        public static MovieAPI getInstance() {
-
-            if (service == null) {
-                Retrofit retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(BASE_URL).build();
-                service = retrofit.create(MovieAPI.class);
-                return service;
-
-            } else {
-                return service;
-            }
-
-        }
-
-    }
 }
