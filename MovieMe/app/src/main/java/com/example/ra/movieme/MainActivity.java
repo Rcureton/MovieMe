@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 @BindView(R.id.now_playingButton)ImageButton mNowPlaying;
 @BindView(R.id.favoritesButton)ImageButton mFavorites;
 @BindView(R.id.topRatedButton)ImageButton mTopRated;
+@BindView(R.id.searchButton)ImageButton mSearch;
 @BindView(R.id.upcomingButton)ImageButton mComingSoon;
 
     @Override
@@ -51,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent= new Intent(MainActivity.this, PopularActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(intent);
             }
         });

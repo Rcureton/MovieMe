@@ -3,6 +3,7 @@ package com.example.ra.movieme.Retrofit;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -12,7 +13,6 @@ import retrofit2.http.Query;
  */
 public interface MovieAPI {
 
-    String BASE_URL = "https://api.themoviedb.org/3/movie/";
 
     @GET("{type}")
     Call<Movie> getMovie(@Path("type") String type, @Query("api_key") String api);
@@ -22,6 +22,8 @@ public interface MovieAPI {
     @GET("upcoming")Call<Movie> getUpcoming(@Query("api_key")String api);
     @GET("now_playing")Call<Movie> getNowPlaying(@Query("api_key")String api);
     @GET("popular")Call<Movie> getPopular(@Query("api_key")String api);
+
+    @GET("movie?")Call<Movie> getSearchMovie(@Query("api_key") String api, @Query("query") String query);
 
 
 }

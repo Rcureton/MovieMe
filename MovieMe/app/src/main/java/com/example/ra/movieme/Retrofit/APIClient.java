@@ -10,12 +10,24 @@ public class APIClient {
 
     //Retrofit API client setup to make the calls to server
     public static final String BASE_URL="https://api.themoviedb.org/3/movie/";
+    public static final String SEARCH_URL="https://api.themoviedb.org/3/search/";
+
     private static Retrofit retrofit= null;
 
     public static Retrofit getClient(){
         if(retrofit==null){
             retrofit= new Retrofit.Builder().
                     baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
+
+    public static Retrofit getSearchClient(){
+        if(retrofit==null){
+            retrofit= new Retrofit.Builder().
+                    baseUrl(SEARCH_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

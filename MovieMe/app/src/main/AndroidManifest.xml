@@ -21,7 +21,8 @@
         <activity android:name=".Retrofit.MovieDetailsActivity" />
         <activity android:name=".NowPlayingActivity" />
         <activity android:name=".TopRatedActivity" />
-        <activity android:name=".PopularActivity"></activity>
+        <activity android:name=".PopularActivity" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>
