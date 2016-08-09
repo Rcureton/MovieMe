@@ -8,4 +8,4 @@
 - TheMovieDB API
 
 ###Screenshots:
-![](https://github.com/Rcureton/MovieMe/blob/master/screenshots/home.jpg) ![](https://github.com/Rcureton/MovieMe/blob/master/screenshots/now_playing.jpg) ![](https://github.com/Rcureton/MovieMe/blob/master/screenshots/top_rated.jpg) ![](https://github.com/Rcureton/MovieMe/blob/master/screenshots/upcoming_movies.jpg)
+![](https://github.com/Rcureton/MovieMe/blob/master/screenshots/appcollage.jpg)
