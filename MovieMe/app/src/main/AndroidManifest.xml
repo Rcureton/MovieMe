@@ -18,7 +18,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".UpcomingActivity" />
-        <activity android:name=".Retrofit.MovieDetailsActivity"></activity>
+        <activity android:name=".Retrofit.MovieDetailsActivity" />
+        <activity android:name=".NowPlayingActivity" />
+        <activity android:name=".TopRatedActivity" />
+        <activity android:name=".PopularActivity"></activity>
     </application>
 
 </manifest>

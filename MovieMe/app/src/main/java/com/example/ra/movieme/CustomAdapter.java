@@ -44,19 +44,20 @@ public class CustomAdapter extends ArrayAdapter<Result> {
 
         String name= movieItems.getTitle();
         String description= movieItems.getOverview();
+        String releaseDate= movieItems.getReleaseDate();
         double rating= movieItems.getVoteAverage();
         String image= movieItems.getBackdropPath();
         int id= movieItems.getId();
 
         movieName.setText(name);
-//        movieDescription.setText(description);
+        movieDescription.setText(description);
         if(image !=null){
             Picasso.with(parent.getContext()).load("http://image.tmdb.org/t/p/w500/"+image).into(movieImage);
         }else{
             Picasso.with(parent.getContext()).load("http://c3240dd96f54819fb6f2-90846526673b19d9a04c27097b58cb86.r6.cf2.rackcdn.com/2011/01/amc-theaters.jpg").into(movieImage);
         }
 
-//        movieRating.setText(String.valueOf(movieItems.getPopularity()));
+        movieRating.setText("Release Date: "+ releaseDate);
 
         return itemLayout;
     }

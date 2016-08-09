@@ -20,6 +20,8 @@ public interface MovieAPI {
     @GET("{id}/reviews")Call<Reviews> getReviews(@Path("id") String id, @Query("api_key") String api);
     @GET("top_rated")Call<Movie> getTopRated(@Query("api_key") String api);
     @GET("upcoming")Call<Movie> getUpcoming(@Query("api_key")String api);
+    @GET("now_playing")Call<Movie> getNowPlaying(@Query("api_key")String api);
+    @GET("popular")Call<Movie> getPopular(@Query("api_key")String api);
 
 
 }

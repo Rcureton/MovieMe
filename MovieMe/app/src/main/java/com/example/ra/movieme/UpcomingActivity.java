@@ -38,6 +38,7 @@ public class UpcomingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upcoming);
         ButterKnife.bind(this);
+        setTitle("Upcoming Movies");
 
         mMovies= new ArrayList<>();
         mAdapter= new CustomAdapter(this, mMovies);
