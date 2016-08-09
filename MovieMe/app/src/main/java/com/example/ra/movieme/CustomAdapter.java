@@ -1,6 +1,7 @@
 package com.example.ra.movieme;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,15 @@ import com.example.ra.movieme.Retrofit.Result;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ra on 8/8/16.
  */
 public class CustomAdapter extends ArrayAdapter<Result> {
-    ArrayList<Result> mResults;
+    List<Result> mResults;
 
-    public CustomAdapter(Context context, ArrayList<Result> movieItems){
+    public CustomAdapter(Context context, List<Result> movieItems){
         super(context,-1);
 
         mResults= new ArrayList<>();
@@ -47,15 +49,27 @@ public class CustomAdapter extends ArrayAdapter<Result> {
         int id= movieItems.getId();
 
         movieName.setText(name);
-        movieDescription.setText(description);
+//        movieDescription.setText(description);
         if(image !=null){
             Picasso.with(parent.getContext()).load("http://image.tmdb.org/t/p/w500/"+image).into(movieImage);
         }else{
             Picasso.with(parent.getContext()).load("http://c3240dd96f54819fb6f2-90846526673b19d9a04c27097b58cb86.r6.cf2.rackcdn.com/2011/01/amc-theaters.jpg").into(movieImage);
         }
 
-        movieRating.setText(String.valueOf(movieItems.getPopularity()));
+//        movieRating.setText(String.valueOf(movieItems.getPopularity()));
 
         return itemLayout;
+    }
+
+    @Override
+    public int getCount() {
+        return mResults.size();
+    }
+
+    public void setResults(List<Result> results) {
+        mResults.clear();
+        if(results != null){
+            mResults.addAll(results);
+        }
     }
 }
