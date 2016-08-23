@@ -24,6 +24,10 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class SearchActivity extends AppCompatActivity {
     @BindView(R.id.editText)EditText mEditText;
@@ -59,26 +63,28 @@ public class SearchActivity extends AppCompatActivity {
                 }
 
                 MovieAPI apiCall= APIClient.getSearchClient().create(MovieAPI.class);
-                Call<Movie> searchCall= apiCall.getSearchMovie(getString(R.string.movie_api_key),searchText);
-                searchCall.enqueue(new Callback<Movie>() {
-                    @Override
-                    public void onResponse(Call<Movie> call, Response<Movie> response) {
-                        Log.d("CALL",call.request().url().toString());
-                        List<Result> movieList= response.body().getResults();
+                Observable<Movie> searchCall= apiCall.getSearchMovie(getString(R.string.movie_api_key),searchText);
+                searchCall.subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<Movie>() {
+                            @Override
+                            public void onCompleted() {
 
-                        mList.setAdapter(new CustomAdapter(context,movieList));
-                        mAdapter.setResults(movieList);
-                        mAdapter.notifyDataSetChanged();
-                       String message= response.message();
-                        Log.d("MESSAGE", message);
-                    }
+                            }
 
-                    @Override
-                    public void onFailure(Call<Movie> call, Throwable t) {
-                    String fail= t.getMessage();
-                        Log.d("FAIL", fail);
-                    }
-                });
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onNext(Movie movie) {
+                                List<Result> searchMovies= movie.getResults();
+                                mList.setAdapter(new CustomAdapter(context,searchMovies));
+                                mAdapter.setResults(searchMovies);
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        });
             }
         });
 

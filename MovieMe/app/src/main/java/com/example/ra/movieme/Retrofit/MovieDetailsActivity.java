@@ -30,15 +30,15 @@ public class MovieDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_details);
         ButterKnife.bind(this);
 
-        Intent intent= getIntent();
-        MovieItems movieItems= intent.getParcelableExtra(MovieItems.MY_ITEMS);
-
-        movieID= movieItems.getMovieId();
-        mMovieName.setText(movieItems.getMovieName());
-        mMovieRelease.setText(movieItems.getMovieRelease());
-        mMovieDescription.setText(movieItems.getMovieDescription());
-        String movieImage= movieItems.getMovieImage();
-        Picasso.with(this).load("http://image.tmdb.org/t/p/w500/"+movieImage).into(mMovieImage);
+//        Intent intent= getIntent();
+//        MovieItems movieItems= intent.getParcelableExtra(MovieItems.MY_ITEMS);
+//
+//        movieID= movieItems.getMovieId();
+//        mMovieName.setText(movieItems.getMovieName());
+//        mMovieRelease.setText(movieItems.getMovieRelease());
+//        mMovieDescription.setText(movieItems.getMovieDescription());
+//        String movieImage= movieItems.getMovieImage();
+//        Picasso.with(this).load("http://image.tmdb.org/t/p/w500/"+movieImage).into(mMovieImage);
 
 
 

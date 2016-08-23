@@ -25,6 +25,10 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class UpcomingActivity extends AppCompatActivity {
 
@@ -43,34 +47,41 @@ public class UpcomingActivity extends AppCompatActivity {
         mMovies= new ArrayList<>();
         mAdapter= new CustomAdapter(this, mMovies);
         context=this;
+        mAdapter.notifyDataSetChanged();
 
        final MovieItems movieItems= new MovieItems();
 
         MovieAPI apiCall= APIClient.getClient().create(MovieAPI.class);
-        Call<Movie> upcomingCall= apiCall.getUpcoming(getString(R.string.movie_api_key));
-        upcomingCall.enqueue(new Callback<Movie>() {
-            @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
-               Log.d("RESPONE", response.body().toString());
-                List<Result> movieList= response.body().getResults();
-                mMoviesList.setAdapter(new CustomAdapter(context,movieList));
-                mAdapter.setResults(movieList);
-                mAdapter.notifyDataSetChanged();
-            }
+        Observable<Movie> upcomingCall= apiCall.getUpcoming(getString(R.string.movie_api_key));
+        upcomingCall.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Movie>() {
+                    @Override
+                    public void onCompleted() {
 
-            @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
+                    }
 
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Movie movie) {
+                    List<Result> upMovies= movie.getResults();
+                        mMoviesList.setAdapter(new CustomAdapter(context,upMovies));
+                        mAdapter.setResults(upMovies);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
+
+
 
         mMoviesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
                 final Result movieId= mMovies.get(position);
-
-
                 movieItems.setMovieId(movieId.getId());
                 movieItems.setMovieName(movieId.getOriginalTitle());
                 movieItems.setMovieTrailer(movieId.getReleaseDate());
